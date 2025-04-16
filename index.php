@@ -1,4 +1,12 @@
 <?php 
+session_start(); // Start the session
+
+
+// Display message if exists
+if (isset($_SESSION['message'])) {
+  echo '<div class="alert alert-success text-center">' . $_SESSION['message'] . '</div>';
+  unset($_SESSION['message']); // Clear the message after displaying it
+}
 
 require_once __DIR__ . '/server.php';
 
@@ -15,6 +23,7 @@ require_once __DIR__ . '/server.php';
   </head>
   <body>
     <h1 class="text-center mt-4">Lista Dischi</h1>
+    <hr>
 
     <div class="container bg-light mt-4 p-4 rounded-3 shadow-lg">
       <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -34,6 +43,35 @@ require_once __DIR__ . '/server.php';
         } 
         ?>
       </div>
+    </div>
+    <hr>
+    <div class="container">
+      <h1 class="text-center my-3"> Aggiungi un disco</h1>
+      <form action="server.php" method="POST" class="bg-light p-4 rounded-3 shadow-lg mb-5">
+        <div class="d-flex flex-column gap-2">
+        <label class="fs-5 fw-bold" for="titolo">Inserisci il titolo:</label>
+        <input type="text" id="titolo" name="titolo" class="form-control mb-3" placeholder="Titolo del disco" required>
+        </div>
+        <div class="d-flex flex-column gap-2">
+        <label class="fs-5 fw-bold" for="artista">Inserisci il artista:</label>
+        <input type="text" id="artista" name="artista" class="form-control mb-3" placeholder="Artista del disco" required>
+        </div>
+        <div class="d-flex flex-column gap-2">
+        <label class="fs-5 fw-bold" for="url_della_cover">Inserisci il url_della_cover:</label>
+        <input type="text" id="url_della_cover" name="url_della_cover" class="form-control mb-3" placeholder="url_della_cover del disco" required>
+        </div>
+        <div class="d-flex flex-column gap-2">
+        <label class="fs-5 fw-bold" for="anno_di_pubblicazione">Inserisci il anno_di_pubblicazione:</label>
+        <input type="number" id="anno_di_pubblicazione" name="anno_di_pubblicazione" min="1000" max="2025" value="1000" class="form-control mb-3" placeholder="anno_di_pubblicazione del disco" required>
+        </div>
+        <div class="d-flex flex-column gap-2">
+        <label class="fs-5 fw-bold" for="genere">Inserisci il genere:</label>
+        <input type="text" id="genere" name="genere" class="form-control mb-3" placeholder="Genere del disco" required>
+        </div>
+        <div class="d-flex justify-content-center mb-5">
+          <button type="submit" class="btn btn-primary ">Aggiungi Disco</button>
+        </div>
+      </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
